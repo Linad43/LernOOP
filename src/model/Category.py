@@ -21,17 +21,17 @@ class Category:
         # Возможно следующим образом, не понял задачи
         # Category.product_count += sum(map(lambda product: product.quantity, products))
 
-    def read_json(path: Path) -> list[Category]:
-        result = []
-        with open(path, encoding="utf-8") as file:
-            data = json.load(file)
-        for item in data:
-            name = item["name"]
-            description = item["description"]
-            products: list[Product] = []
-            for product in item["products"]:
-                products.append(
-                    Product(product["name"], product["description"], product["price"], product["quantity"])
-                )
-            result.append(Category(name, description, products))
-        return result
+    # def read_json(path: Path) -> list[Category]:
+    #     result = []
+    #     with open(path, encoding="utf-8") as file:
+    #         data = json.load(file)
+    #     for item in data:
+    #         name = item["name"]
+    #         description = item["description"]
+    #         products: list[Product] = []
+    #         for product in item["products"]:
+    #             products.append(
+    #                 Product(product["name"], product["description"], product["price"], product["quantity"])
+    #             )
+    #         result.append(Category(name, description, products))
+    #     return result
