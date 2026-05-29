@@ -1,6 +1,3 @@
-import json
-from pathlib import Path
-
 from src.model.Product import Product
 
 
@@ -10,16 +7,26 @@ class Category:
 
     name: str
     description: str
-    products: list[Product]
+    __products: list[Product]
 
     def __init__(self, name: str, description: str, products: list):
         self.name = name
         self.description = description
-        self.products = products
+        self.__products = products
         Category.category_count += 1
         Category.product_count += len(products)
         # Возможно следующим образом, не понял задачи
         # Category.product_count += sum(map(lambda product: product.quantity, products))
+
+    def add_product(self, product: Product) -> None:
+        self.__products.append(product)
+
+    @property
+    def products(self) -> str:
+        result = ""
+        for product in self.__products:
+            result += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
+        return result
 
     # def read_json(path: Path) -> list[Category]:
     #     result = []

@@ -1,3 +1,5 @@
+from os import name
+
 import pytest
 
 from src.model.Category import Category
@@ -17,9 +19,23 @@ def category_smart() -> Category:
 
 
 def test_category(category_smart: Category) -> None:
-    assert len(category_smart.products) == 3
     assert category_smart.name == "Смартфоны"
     assert (
-        category_smart.description
-        == "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни"
+            category_smart.description
+            == "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни"
     )
+
+
+def test_products(category_smart: Category) -> None:
+    category_smart.add_product(
+        Product(
+            "Samsung Galaxy S23",
+            "256GB, Серый цвет, 200MP камера",
+            100000.0,
+            1
+        )
+    )
+    assert category_smart.products == ("Samsung Galaxy S23 Ultra, 180000.0 руб. Остаток: 5 шт.\n"
+                                       "Iphone 15, 210000.0 руб. Остаток: 8 шт.\n"
+                                       "Xiaomi Redmi Note 11, 31000.0 руб. Остаток: 14 шт.\n"
+                                       "Samsung Galaxy S23, 100000.0 руб. Остаток: 1 шт.\n")
