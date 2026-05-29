@@ -1,8 +1,8 @@
 from pathlib import Path
+from unittest.mock import patch
 
 import pytest
-
-from src.model.Category import Category
+from src.model import Product
 from src.model.Product import Product
 
 
@@ -23,6 +23,19 @@ def test_init(product_iphone: Product) -> None:
     assert product_iphone.description == "512GB, Gray space"
     assert product_iphone.price == 210000.0
     assert product_iphone.quantity == 8
+
+def test_new_product() -> None:
+    product1 = Product.new_product("Iphone 9", "512GB, Gray space", 210000.0, 8)
+    product2 = Product.new_product("Iphone 9", "512GB, Gray space", 210000.0, 5)
+    assert product1.quantity == 13
+    assert product1.quantity == product2.quantity
+
+@patch("builtins.input", return_value="y")
+def test_change_price(mock_input, product_iphone: Product) -> None:
+    product_iphone.price = 200000.0
+    assert product_iphone.price == 200000.0
+    product_iphone.price = 220000.0
+    assert product_iphone.price == 220000.0
 
 
 # def test_read_json(path_json: Path) -> None:
