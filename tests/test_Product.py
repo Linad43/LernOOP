@@ -11,6 +11,11 @@ def product_iphone() -> Product:
     return Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
 
 
+@pytest.fixture
+def product_xiaomi() -> Product:
+    return Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
+
+
 # @pytest.fixture
 # def path_json() -> Path:
 #     path = Path(__file__).resolve().parents[1]
@@ -24,11 +29,13 @@ def test_init(product_iphone: Product) -> None:
     assert product_iphone.price == 210000.0
     assert product_iphone.quantity == 8
 
+
 def test_new_product() -> None:
     product1 = Product.new_product("Iphone 9", "512GB, Gray space", 210000.0, 8)
     product2 = Product.new_product("Iphone 9", "512GB, Gray space", 210000.0, 5)
     assert product1.quantity == 13
     assert product1.quantity == product2.quantity
+
 
 @patch("builtins.input", return_value="y")
 def test_change_price(mock_input, product_iphone: Product) -> None:
@@ -47,3 +54,5 @@ def test_change_price(mock_input, product_iphone: Product) -> None:
 #         == "Смартфоны, как средство не только коммуникации, но и получение дополнительных функций для удобства жизни"
 #     )
 #     assert len(read_data[0].products) == 3
+def test_sum_products(product_iphone: Product, product_xiaomi) -> None:
+    assert product_iphone + product_xiaomi == ((210000.0 * 8) + (31000.0 * 14))
