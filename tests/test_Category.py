@@ -39,3 +39,7 @@ def test_products(category_smart: Category) -> None:
                                        "Iphone 15, 210000.0 руб. Остаток: 8 шт.\n"
                                        "Xiaomi Redmi Note 11, 31000.0 руб. Остаток: 14 шт.\n"
                                        "Samsung Galaxy S23, 100000.0 руб. Остаток: 1 шт.\n")
+
+
+def test_category_toString(category_smart: Category) -> None:
+    assert str(category_smart) == "Смартфоны, количество продуктов: 27 шт.\n"

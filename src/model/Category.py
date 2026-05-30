@@ -25,8 +25,12 @@ class Category:
     def products(self) -> str:
         result = ""
         for product in self.__products:
-            result += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
+            # result += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
+            result += str(product)
         return result
+
+    def __str__(self) -> str:
+        return f"{self.name}, количество продуктов: {sum(product.quantity for product in self.__products)} шт.\n"
 
     # def read_json(path: Path) -> list[Category]:
     #     result = []
