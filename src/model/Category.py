@@ -19,7 +19,10 @@ class Category:
         # Category.product_count += sum(map(lambda product: product.quantity, products))
 
     def add_product(self, product: Product) -> None:
-        self.__products.append(product)
+        if isinstance(product, Product):
+            self.__products.append(product)
+        else:
+            raise TypeError("Нельзя добавить объекты не наследующиеся от Product")
 
     @property
     def products(self) -> str:

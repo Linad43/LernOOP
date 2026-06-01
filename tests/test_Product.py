@@ -3,7 +3,9 @@ from unittest.mock import patch
 
 import pytest
 from src.model import Product
+from src.model.LawnGrass import LawnGrass
 from src.model.Product import Product
+from src.model.Smartphone import Smartphone
 
 
 @pytest.fixture
@@ -14,6 +16,31 @@ def product_iphone() -> Product:
 @pytest.fixture
 def product_xiaomi() -> Product:
     return Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
+
+
+@pytest.fixture
+def smartphone_test() -> Smartphone:
+    return Smartphone(
+        "Iphone 15",
+        "512GB, Gray space",
+        210000.0,
+        8,
+        0.95,
+        "15",
+        125,
+        "red")
+
+
+@pytest.fixture
+def lawn_grass_test() -> LawnGrass:
+    return LawnGrass(
+        "Iphone 15",
+        "512GB, Gray space",
+        210000.0,
+        8,
+        "China",
+        3,
+        "red")
 
 
 # @pytest.fixture
@@ -54,5 +81,14 @@ def test_change_price(mock_input, product_iphone: Product) -> None:
 #         == "Смартфоны, как средство не только коммуникации, но и получение дополнительных функций для удобства жизни"
 #     )
 #     assert len(read_data[0].products) == 3
-def test_sum_products(product_iphone: Product, product_xiaomi) -> None:
+def test_sum_products(
+        product_iphone: Product,
+        product_xiaomi,
+        smartphone_test: Smartphone,
+        lawn_grass_test: LawnGrass
+) -> None:
     assert product_iphone + product_xiaomi == ((210000.0 * 8) + (31000.0 * 14))
+    with pytest.raises(TypeError) as excinfo:
+        smartphone_test + lawn_grass_test
+    assert str(excinfo.value) == "Суммировать можно только объекты одного класса"
+    assert smartphone_test + smartphone_test == ((210000.0 * 8) * 2)

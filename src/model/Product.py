@@ -6,7 +6,13 @@ class Product:
     __price: float
     quantity: int
 
-    def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
+    def __init__(
+            self,
+            name: str,
+            description: str,
+            price: float,
+            quantity: int
+    ) -> None:
         self.name = name
         self.description = description
         self.__price = price
@@ -45,4 +51,7 @@ class Product:
         return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт.\n"
 
     def __add__(self, other) -> float:
-        return (self.__price * self.quantity) + (other.__price * other.quantity)
+        if type(self) == type(other):
+            return (self.__price * self.quantity) + (other.__price * other.quantity)
+        else:
+            raise TypeError("Суммировать можно только объекты одного класса")
