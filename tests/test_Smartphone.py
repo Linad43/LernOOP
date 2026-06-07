@@ -5,15 +5,8 @@ from src.model.Smartphone import Smartphone
 
 @pytest.fixture
 def smartphone_iphone() -> Smartphone:
-    return Smartphone(
-        "Iphone 15",
-        "512GB, Gray space",
-        210000.0,
-        8,
-        0.95,
-        "15",
-        125,
-        "red")
+    return Smartphone("Iphone 15", "512GB, Gray space", 210000.0, 8, 0.95, "15", 125, "red")
+
 
 def test_init(smartphone_iphone: Smartphone) -> None:
     assert smartphone_iphone.name == "Iphone 15"

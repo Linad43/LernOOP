@@ -1,10 +1,11 @@
-from pathlib import Path
+# from pathlib import Path
 from unittest.mock import patch
 
 import pytest
-from src.model import Product
+
+# from src.model import product
 from src.model.LawnGrass import LawnGrass
-from src.model.Product import Product
+from src.model.product import Product
 from src.model.Smartphone import Smartphone
 
 
@@ -20,27 +21,12 @@ def product_xiaomi() -> Product:
 
 @pytest.fixture
 def smartphone_test() -> Smartphone:
-    return Smartphone(
-        "Iphone 15",
-        "512GB, Gray space",
-        210000.0,
-        8,
-        0.95,
-        "15",
-        125,
-        "red")
+    return Smartphone("Iphone 15", "512GB, Gray space", 210000.0, 8, 0.95, "15", 125, "red")
 
 
 @pytest.fixture
 def lawn_grass_test() -> LawnGrass:
-    return LawnGrass(
-        "Iphone 15",
-        "512GB, Gray space",
-        210000.0,
-        8,
-        "China",
-        3,
-        "red")
+    return LawnGrass("Iphone 15", "512GB, Gray space", 210000.0, 8, "China", 3, "red")
 
 
 # @pytest.fixture
@@ -82,10 +68,7 @@ def test_change_price(mock_input, product_iphone: Product) -> None:
 #     )
 #     assert len(read_data[0].products) == 3
 def test_sum_products(
-        product_iphone: Product,
-        product_xiaomi,
-        smartphone_test: Smartphone,
-        lawn_grass_test: LawnGrass
+    product_iphone: Product, product_xiaomi, smartphone_test: Smartphone, lawn_grass_test: LawnGrass
 ) -> None:
     assert product_iphone + product_xiaomi == ((210000.0 * 8) + (31000.0 * 14))
     with pytest.raises(TypeError) as excinfo:
