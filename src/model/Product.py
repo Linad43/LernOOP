@@ -1,4 +1,8 @@
-class Product:
+from src.model.BaseProduct import BaseProduct
+from src.model.MixinLog import MixinLog
+
+
+class Product(MixinLog, BaseProduct):
     products = {}
 
     name: str
@@ -18,6 +22,7 @@ class Product:
         self.__price = price
         self.quantity = quantity
         Product.products[name] = self
+        super().__init__(name, description, price, quantity)
 
     @classmethod
     def new_product(
@@ -55,3 +60,9 @@ class Product:
             return (self.__price * self.quantity) + (other.__price * other.quantity)
         else:
             raise TypeError("Суммировать можно только объекты одного класса")
+
+    def __repr__(self):
+        return (f"Product(\'{self.name}\', "
+                f"\'{self.description}\', "
+                f"{self.price}, "
+                f"{self.quantity})")
