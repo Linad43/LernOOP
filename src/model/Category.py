@@ -1,4 +1,4 @@
-from src.model.Product import Product
+from src.model.product import Product
 
 
 class Category:

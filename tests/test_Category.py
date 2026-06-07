@@ -1,9 +1,7 @@
-from os import name
-
 import pytest
 
 from src.model.Category import Category
-from src.model.Product import Product
+from src.model.product import Product
 
 
 @pytest.fixture
@@ -27,18 +25,13 @@ def test_category(category_smart: Category) -> None:
 
 
 def test_products(category_smart: Category) -> None:
-    category_smart.add_product(
-        Product(
-            "Samsung Galaxy S23",
-            "256GB, Серый цвет, 200MP камера",
-            100000.0,
-            1
-        )
+    category_smart.add_product(Product("Samsung Galaxy S23", "256GB, Серый цвет, 200MP камера", 100000.0, 1))
+    assert category_smart.products == (
+        "Samsung Galaxy S23 Ultra, 180000.0 руб. Остаток: 5 шт.\n"
+        "Iphone 15, 210000.0 руб. Остаток: 8 шт.\n"
+        "Xiaomi Redmi Note 11, 31000.0 руб. Остаток: 14 шт.\n"
+        "Samsung Galaxy S23, 100000.0 руб. Остаток: 1 шт.\n"
     )
-    assert category_smart.products == ("Samsung Galaxy S23 Ultra, 180000.0 руб. Остаток: 5 шт.\n"
-                                       "Iphone 15, 210000.0 руб. Остаток: 8 шт.\n"
-                                       "Xiaomi Redmi Note 11, 31000.0 руб. Остаток: 14 шт.\n"
-                                       "Samsung Galaxy S23, 100000.0 руб. Остаток: 1 шт.\n")
 
 
 def test_category_toString(category_smart: Category) -> None:

@@ -1,4 +1,4 @@
-from src.model.Product import Product
+from src.model.product import Product
 
 
 class LawnGrass(Product):
@@ -7,14 +7,14 @@ class LawnGrass(Product):
     color: str
 
     def __init__(
-            self,
-            name: str,
-            description: str,
-            price: float,
-            quantity: int,
-            country: str,
-            germination_period: int,
-            color: str
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity: int,
+        country: str,
+        germination_period: int,
+        color: str,
     ) -> None:
         super().__init__(name, description, price, quantity)
         self.country = country
