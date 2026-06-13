@@ -1,6 +1,6 @@
 import pytest
 
-from src.model.Category import Category
+from src.model.category import Category
 from src.model.product import Product
 
 
@@ -36,3 +36,9 @@ def test_products(category_smart: Category) -> None:
 
 def test_category_toString(category_smart: Category) -> None:
     assert str(category_smart) == "Смартфоны, количество продуктов: 27 шт.\n"
+
+
+def test_average_price(category_smart: Category) -> None:
+    assert category_smart.average_price() == ((180000 + 210000 + 31000) / 3)
+    category = Category("Телефоны","Нет описания", [])
+    assert category.average_price() == 0

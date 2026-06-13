@@ -4,9 +4,9 @@ from unittest.mock import patch
 import pytest
 
 # from src.model import product
-from src.model.LawnGrass import LawnGrass
+from src.model.lawnGrass import LawnGrass
 from src.model.product import Product
-from src.model.Smartphone import Smartphone
+from src.model.smartphone import Smartphone
 
 
 @pytest.fixture
@@ -41,6 +41,9 @@ def test_init(product_iphone: Product) -> None:
     assert product_iphone.description == "512GB, Gray space"
     assert product_iphone.price == 210000.0
     assert product_iphone.quantity == 8
+    with pytest.raises(ValueError, ) as excinfo:
+        Product("Iphone 15", "512GB, Gray space", 210000.0, 0)
+    assert str(excinfo.value) == "Товар с нулевым количеством не может быть добавлен"
 
 
 def test_new_product() -> None:
@@ -68,7 +71,7 @@ def test_change_price(mock_input, product_iphone: Product) -> None:
 #     )
 #     assert len(read_data[0].products) == 3
 def test_sum_products(
-    product_iphone: Product, product_xiaomi, smartphone_test: Smartphone, lawn_grass_test: LawnGrass
+        product_iphone: Product, product_xiaomi, smartphone_test: Smartphone, lawn_grass_test: LawnGrass
 ) -> None:
     assert product_iphone + product_xiaomi == ((210000.0 * 8) + (31000.0 * 14))
     with pytest.raises(TypeError) as excinfo:

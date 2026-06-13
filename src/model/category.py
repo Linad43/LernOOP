@@ -35,6 +35,15 @@ class Category:
     def __str__(self) -> str:
         return f"{self.name}, количество продуктов: {sum(product.quantity for product in self.__products)} шт.\n"
 
+    def average_price(self) -> float:
+        try:
+            sum_price = 0
+            for product in self.__products:
+                sum_price += product.price
+            return sum_price / len(self.__products)
+        except ZeroDivisionError:
+            return 0
+
     # def read_json(path: Path) -> list[Category]:
     #     result = []
     #     with open(path, encoding="utf-8") as file:
