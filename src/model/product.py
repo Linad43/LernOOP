@@ -1,5 +1,5 @@
-from src.model.BaseProduct import BaseProduct
-from src.model.MixinLog import MixinLog
+from src.model.baseProduct import BaseProduct
+from src.model.mixinLog import MixinLog
 
 
 class Product(MixinLog, BaseProduct):
@@ -11,6 +11,8 @@ class Product(MixinLog, BaseProduct):
     quantity: int
 
     def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
+        if quantity == 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
         self.name = name
         self.description = description
         self.__price = price

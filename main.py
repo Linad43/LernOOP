@@ -1,4 +1,4 @@
-from src.model.Category import Category
+from src.model.category import Category
 from src.model.product import Product
 
 if __name__ == "__main__":
